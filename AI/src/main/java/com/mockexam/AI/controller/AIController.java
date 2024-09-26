@@ -1,4 +1,4 @@
-package com.mockexam.Quiz.controller;
+package com.mockexam.AI.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/quiz")
-public class QuizController {
+@RequestMapping("/ai")
+public class AIController {
     @GetMapping
     public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Quiz responding...");
+        return ResponseEntity.ok("AI responding...");
     }
 }

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
     @GetMapping
-    public ResponseEntity<String> test() {
+    public ResponseEntity<String> test() throws InterruptedException {
+        Thread.sleep(2000);
         return ResponseEntity.ok("User responding...");
     }
 }

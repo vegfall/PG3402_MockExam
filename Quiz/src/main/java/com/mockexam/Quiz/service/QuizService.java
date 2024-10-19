@@ -1,8 +1,9 @@
 package com.mockexam.Quiz.service;
 
-import org.springframework.stereotype.Service;
+import com.mockexam.Quiz.dto.QuizDTO;
+import org.springframework.http.ResponseEntity;
 
-@Service
-public class QuizService {
-
+public interface QuizService {
+    QuizDTO getQuiz(String quizKey);
+    QuizDTO postQuiz();
 }

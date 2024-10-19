@@ -19,7 +19,9 @@ public class QuizController {
     public ResponseEntity<QuizDTO> getQuiz(@PathVariable String quizKey) {
         QuizDTO foundQuizDTO = simpleQuizService.getQuiz(quizKey);
 
-        return new ResponseEntity<>(foundQuizDTO, HttpStatus.FOUND);
+        return foundQuizDTO != null
+                ? new ResponseEntity<>(foundQuizDTO, HttpStatus.FOUND)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping

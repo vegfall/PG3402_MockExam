@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
-    private final SimpleQuizService simpleQuizService;
+    private final SimpleQuizService quizService;
 
     public QuizController() {
-        simpleQuizService = new SimpleQuizService();
+        quizService = new SimpleQuizService();
     }
 
     @GetMapping("/{quizKey}")
     public ResponseEntity<QuizDTO> getQuiz(@PathVariable String quizKey) {
-        QuizDTO foundQuizDTO = simpleQuizService.getQuiz(quizKey);
+        QuizDTO foundQuizDTO = quizService.getQuiz(quizKey);
 
         return foundQuizDTO != null
                 ? new ResponseEntity<>(foundQuizDTO, HttpStatus.FOUND)
@@ -26,7 +26,7 @@ public class QuizController {
 
     @PostMapping
     public ResponseEntity<QuizDTO> postQuiz() {
-        QuizDTO createdQuizDTO = simpleQuizService.postQuiz();
+        QuizDTO createdQuizDTO = quizService.postQuiz();
 
         return new ResponseEntity<>(createdQuizDTO, HttpStatus.CREATED);
     }

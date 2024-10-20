@@ -32,7 +32,6 @@ public class QuestionController {
         List<QuestionDTO> questions = questionService.getAllQuestions(quizKey);
 
         return questions != null ? new ResponseEntity<>(questions, HttpStatus.FOUND) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-
     }
 
     @GetMapping("test")

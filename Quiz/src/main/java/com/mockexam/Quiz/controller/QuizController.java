@@ -2,9 +2,8 @@ package com.mockexam.Quiz.controller;
 
 import com.mockexam.Quiz.dto.QuestionDTO;
 import com.mockexam.Quiz.dto.ResultDTO;
+import com.mockexam.Quiz.dto.SessionDTO;
 import com.mockexam.Quiz.service.SimpleQuizService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
-    private static final Logger log = LoggerFactory.getLogger(QuizController.class);
     private final SimpleQuizService quizService;
 
     public QuizController() {
@@ -26,6 +24,12 @@ public class QuizController {
         return question != null
                 ? new ResponseEntity<>(question, HttpStatus.FOUND)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    //Hardcoded for testing
+    @PostMapping("new-quiz")
+    public ResponseEntity<SessionDTO> newQuiz() {
+        return new ResponseEntity<>(quizService.newQuiz("1234"), HttpStatus.CREATED);
     }
 
     @PostMapping("{sessionKey}/response/{alternativeKey}")

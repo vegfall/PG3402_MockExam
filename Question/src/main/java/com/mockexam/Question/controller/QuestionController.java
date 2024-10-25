@@ -3,12 +3,12 @@ package com.mockexam.Question.controller;
 import com.mockexam.Question.dto.QuestionDTO;
 import com.mockexam.Question.dto.ResultDTO;
 import com.mockexam.Question.service.SimpleQuestionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -18,39 +18,24 @@ public class QuestionController {
         questionService = new SimpleQuestionService();
     }
 
-    @GetMapping("{sessionKey}/current-question")
-    public ResponseEntity<QuestionDTO> getCurrentQuestion(@PathVariable String sessionKey) {
-        return null;
+    @GetMapping("{sessionKey}/current-question/{questionKey}")
+    public ResponseEntity<QuestionDTO> getCurrentQuestion(@PathVariable String sessionKey, @PathVariable int questionKey) {
+        QuestionDTO question = questionService.getCurrentQuestion(sessionKey, questionKey);
+
+        return question != null
+                ? new ResponseEntity<>(question, HttpStatus.FOUND)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("{sessionKey}/current-question-id/{questionKey}")
+    public ResponseEntity<Long> getCurrentQuestionId(@PathVariable String sessionKey, @PathVariable int questionKey) {
+        Long questionId = questionService.getCurrentQuestionId(sessionKey, questionKey);
+
+        return new ResponseEntity<>(questionId, HttpStatus.FOUND);
     }
 
     @PostMapping("{sessionKey}/response/{alternativeKey}")
     public ResponseEntity<ResultDTO> postAnswer(@PathVariable String sessionKey, @PathVariable int alternativeKey) {
         return null;
     }
-
-    /*
-
-
-
-
-    @GetMapping("{quizKey}/{questionId}")
-    public ResponseEntity<QuestionDTO> getNextQuestion(@PathVariable String quizKey, @PathVariable Integer questionId) {
-        QuestionDTO question = questionService.getNextQuestion(quizKey, questionId);
-
-        return question != null ? new ResponseEntity<>(question, HttpStatus.FOUND) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("{quizKey}")
-    public ResponseEntity<List<QuestionDTO>> getAllQuestions(@PathVariable String quizKey) {
-        List<QuestionDTO> questions = questionService.getAllQuestions(quizKey);
-
-        return questions != null ? new ResponseEntity<>(questions, HttpStatus.FOUND) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Question responding...");
-    }
-
-     */
 }

@@ -44,4 +44,8 @@ public class MockQuizRepository {
 
         mockSessionRepo.put("1234", session1234);
     }
+
+    public Session getSession(String sessionKey) {
+        return mockSessionRepo.get(sessionKey);
+    }
 }

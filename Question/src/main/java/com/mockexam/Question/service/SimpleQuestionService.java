@@ -5,9 +5,6 @@ import com.mockexam.Question.model.Question;
 import com.mockexam.Question.repository.MockQuestionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class SimpleQuestionService implements QuestionService {
     private final MockQuestionRepository questionRepository;
@@ -17,18 +14,16 @@ public class SimpleQuestionService implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> getAllQuestions(String quizKey) {
-        List<QuestionDTO> questionDTOs = new ArrayList<>();
-
-        for(Question question : questionRepository.getAllQuestions(quizKey)) {
-            questionDTOs.add(question.getDTO());
-        }
-
-        return questionDTOs;
+    public QuestionDTO getCurrentQuestion(String sessionKey, int questionKey) {
+        return questionRepository.getNextQuestion(sessionKey, questionKey).getDTO();
     }
 
     @Override
-    public QuestionDTO getNextQuestion(String quizKey, Integer questionId) {
-        return questionRepository.getNextQuestion(quizKey, questionId).getDTO();
+    public Long getCurrentQuestionId(String sessionKey, int questionKey) {
+        Question question = questionRepository.getNextQuestion(sessionKey, questionKey);
+
+        return question != null
+                ? question.getQuestionId()
+                : null;
     }
 }

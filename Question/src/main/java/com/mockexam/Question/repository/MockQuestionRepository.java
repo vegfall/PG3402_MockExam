@@ -52,10 +52,6 @@ public class MockQuestionRepository {
         ));
     }
 
-    public List<Question> getAllQuestions(String quizKey) {
-        return Objects.equals(quizKey, "1234") ? Collections.list(mockQuestions.elements()).reversed() : null;
-    }
-
     public Question getNextQuestion(String quizKey, Integer questionId) {
         return Objects.equals(quizKey, "1234") ? mockQuestions.get(questionId) : null;
     }

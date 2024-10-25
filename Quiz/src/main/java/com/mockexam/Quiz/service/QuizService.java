@@ -1,9 +1,10 @@
 package com.mockexam.Quiz.service;
 
-import com.mockexam.Quiz.dto.QuizDTO;
-import org.springframework.http.ResponseEntity;
+import com.mockexam.Quiz.dto.QuestionDTO;
+import com.mockexam.Quiz.dto.ResultDTO;
 
 public interface QuizService {
-    QuizDTO getQuiz(String quizKey);
-    QuizDTO postQuiz();
+    QuestionDTO getCurrentQuestion(String sessionKey);
+    ResultDTO postAnswer(String sessionKey, int alternativeKey);
+    boolean nextQuestion(String sessionKey);
 }

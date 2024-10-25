@@ -1,13 +1,11 @@
 package com.mockexam.Question.controller;
 
 import com.mockexam.Question.dto.QuestionDTO;
+import com.mockexam.Question.dto.ResultDTO;
 import com.mockexam.Question.service.SimpleQuestionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,21 @@ public class QuestionController {
     public QuestionController() {
         questionService = new SimpleQuestionService();
     }
+
+    @GetMapping("{sessionKey}/current-question")
+    public ResponseEntity<QuestionDTO> getCurrentQuestion(@PathVariable String sessionKey) {
+        return null;
+    }
+
+    @PostMapping("{sessionKey}/response/{alternativeKey}")
+    public ResponseEntity<ResultDTO> postAnswer(@PathVariable String sessionKey, @PathVariable int alternativeKey) {
+        return null;
+    }
+
+    /*
+
+
+
 
     @GetMapping("{quizKey}/{questionId}")
     public ResponseEntity<QuestionDTO> getNextQuestion(@PathVariable String quizKey, @PathVariable Integer questionId) {
@@ -38,4 +51,6 @@ public class QuestionController {
     public ResponseEntity<String> test() {
         return ResponseEntity.ok("Question responding...");
     }
+
+     */
 }

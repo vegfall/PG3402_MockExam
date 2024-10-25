@@ -12,9 +12,9 @@ import java.util.List;
 @Getter
 public class Question {
     private Long questionId;
+    private int questionKey;
     private String questionText;
     private List<Alternative> alternatives;
-    private int difficulty;
 
     public QuestionDTO getDTO() {
         List<AlternativeDTO> alternativeDTOs = new ArrayList<>();
@@ -23,6 +23,6 @@ public class Question {
             alternativeDTOs.add(alt.getDTO());
         }
 
-        return new QuestionDTO(questionId, questionText, alternativeDTOs, difficulty);
+        return new QuestionDTO(questionKey, questionText, alternativeDTOs);
     }
 }

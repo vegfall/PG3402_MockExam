@@ -1,23 +1,21 @@
 package com.mockexam.Quiz.model;
 
-import com.mockexam.Quiz.dto.QuestionDTO;
 import com.mockexam.Quiz.dto.QuizDTO;
-import com.mockexam.Quiz.misc.QuizStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 public class Quiz {
     private Long quizId;
-    private String quizKey;
-    private int numberOfQuestions;
-    private QuizStatus status;
-    private List<QuestionDTO> questions;
+    private String category;
+    List<Long> questionIds;
+    LocalDateTime createdAt;
 
     public QuizDTO getDTO() {
-        return new QuizDTO(quizKey, status, questions);
+        return new QuizDTO(quizId, category, questionIds.size(), createdAt);
     }
 }

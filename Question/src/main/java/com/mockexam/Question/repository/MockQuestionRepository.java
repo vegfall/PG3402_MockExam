@@ -17,38 +17,38 @@ public class MockQuestionRepository {
     private void createMockQuestions() {
         mockQuestions.put(1, new Question(
                 1L,
+                1,
                 "What is the capital of Norway?",
                 Arrays.asList(
-                        new Alternative(1L, "Oslo", true),
-                        new Alternative(2L, "Stockholm", false),
-                        new Alternative(3L, "Copenhagen", false),
-                        new Alternative(4L, "Reykjavik", false)
-                ),
-                1
+                        new Alternative(1L, 1, "Oslo", true),
+                        new Alternative(2L, 2, "Stockholm", false),
+                        new Alternative(3L, 3, "Copenhagen", false),
+                        new Alternative(4L, 4, "Reykjavik", false)
+                )
         ));
 
         mockQuestions.put(2, new Question(
                 2L,
+                2,
                 "What is the capital of Denmark?",
                 Arrays.asList(
-                        new Alternative(1L, "Oslo", false),
-                        new Alternative(2L, "Stockholm", false),
-                        new Alternative(3L, "Copenhagen", true),
-                        new Alternative(4L, "Reykjavik", false)
-                ),
-                2
+                        new Alternative(5L, 1, "Oslo", false),
+                        new Alternative(6L, 2, "Stockholm", false),
+                        new Alternative(7L, 3, "Copenhagen", true),
+                        new Alternative(8L, 4, "Reykjavik", false)
+                )
         ));
 
         mockQuestions.put(3, new Question(
                 3L,
+                3,
                 "What is the capital of Iceland?",
                 Arrays.asList(
-                        new Alternative(1L, "Oslo", false),
-                        new Alternative(2L, "Stockholm", false),
-                        new Alternative(3L, "Copenhagen", false),
-                        new Alternative(4L, "Reykjavik", true)
-                ),
-                3
+                        new Alternative(9L, 1, "Oslo", false),
+                        new Alternative(10L, 2, "Stockholm", false),
+                        new Alternative(11L, 3, "Copenhagen", false),
+                        new Alternative(12L, 4, "Reykjavik", true)
+                )
         ));
     }
 

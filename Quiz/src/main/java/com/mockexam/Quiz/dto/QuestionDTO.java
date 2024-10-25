@@ -8,8 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class QuestionDTO {
-    private Long questionId;
+    private int questionKey;
     private String questionText;
     private List<AlternativeDTO> alternatives;
-    private int difficulty;
 }

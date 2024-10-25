@@ -1,6 +1,7 @@
 package com.mockexam.Quiz.client;
 
 import com.mockexam.Quiz.dto.QuestionDTO;
+import com.mockexam.Quiz.dto.ResultDTO;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -24,6 +25,27 @@ public class QuestionClient {
         questionUrl = "http://127.0.0.1:8081/question/";
     }
 
+    public QuestionDTO getCurrentQuestion(String sessionKey, Integer questionKey) {
+        String url = UriComponentsBuilder
+                .fromHttpUrl(questionUrl + sessionKey + "/current-question")
+                .toUriString();
+
+        ResponseEntity<QuestionDTO> response = restTemplate.getForEntity(url, QuestionDTO.class);
+
+        return response.getBody();
+    }
+
+    public ResultDTO postAnswer(String sessionKey, int alternativeKey) {
+        String url = UriComponentsBuilder
+                .fromHttpUrl(questionUrl + sessionKey + "/response/" + alternativeKey)
+                .toUriString();
+
+        ResponseEntity<ResultDTO> response = restTemplate.getForEntity(url, ResultDTO.class);
+
+        return response.getBody();
+    }
+
+    /*
     public String getTestResponse() {
         String url = UriComponentsBuilder
                 .fromHttpUrl(questionUrl + "test")
@@ -58,4 +80,6 @@ public class QuestionClient {
 
         return response.getBody();
     }
+
+     */
 }

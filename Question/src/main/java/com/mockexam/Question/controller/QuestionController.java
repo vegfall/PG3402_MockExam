@@ -1,7 +1,7 @@
 package com.mockexam.Question.controller;
 
 import com.mockexam.Question.dto.QuestionDTO;
-import com.mockexam.Question.dto.ResultDTO;
+import com.mockexam.Question.dto.AnswerResultDTO;
 import com.mockexam.Question.service.SimpleQuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,12 @@ public class QuestionController {
         return new ResponseEntity<>(questionId, HttpStatus.FOUND);
     }
 
-    @PostMapping("{sessionKey}/response/{alternativeKey}")
-    public ResponseEntity<ResultDTO> postAnswer(@PathVariable String sessionKey, @PathVariable int alternativeKey) {
-        return null;
+    @PostMapping("{sessionKey}/answer/{questionKey}/{alternativeKey}")
+    public ResponseEntity<AnswerResultDTO> postAnswer(@PathVariable String sessionKey, @PathVariable int questionKey, @PathVariable int alternativeKey) {
+        AnswerResultDTO answerResult = questionService.postAnswer(sessionKey, questionKey, alternativeKey);
+
+        return answerResult != null
+                ? new ResponseEntity<>(answerResult, HttpStatus.CREATED)
+                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }

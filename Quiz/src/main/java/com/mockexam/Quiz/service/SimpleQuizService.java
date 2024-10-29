@@ -2,13 +2,15 @@ package com.mockexam.Quiz.service;
 
 import com.mockexam.Quiz.client.QuestionClient;
 import com.mockexam.Quiz.dto.QuestionDTO;
-import com.mockexam.Quiz.dto.ResultDTO;
+import com.mockexam.Quiz.dto.AnswerResultDTO;
 import com.mockexam.Quiz.dto.SessionDTO;
 import com.mockexam.Quiz.model.Session;
 import com.mockexam.Quiz.repository.MockQuizRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class SimpleQuizService implements QuizService {
     private final MockQuizRepository mockQuizRepository;
@@ -28,8 +30,11 @@ public class SimpleQuizService implements QuizService {
     }
 
     @Override
-    public ResultDTO postAnswer(String sessionKey, int alternativeKey) {
-        return questionClient.postAnswer(sessionKey, alternativeKey);
+    public AnswerResultDTO postAnswer(String sessionKey, int alternativeKey) {
+        Session session = mockQuizRepository.getSession(sessionKey);
+        int currentQuestionIndex = session.getQuestionIds().size();
+
+        return questionClient.postAnswer(sessionKey, currentQuestionIndex, alternativeKey);
     }
 
     @Override

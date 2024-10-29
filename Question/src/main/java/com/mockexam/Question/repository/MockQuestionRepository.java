@@ -52,7 +52,7 @@ public class MockQuestionRepository {
         ));
     }
 
-    public Question getNextQuestion(String quizKey, Integer questionId) {
+    public Question getQuestion(String quizKey, Integer questionId) {
         return Objects.equals(quizKey, "1234") ? mockQuestions.get(questionId) : null;
     }
 }

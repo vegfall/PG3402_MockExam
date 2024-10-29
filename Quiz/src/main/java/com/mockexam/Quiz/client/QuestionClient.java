@@ -1,11 +1,12 @@
 package com.mockexam.Quiz.client;
 
 import com.mockexam.Quiz.dto.QuestionDTO;
-import com.mockexam.Quiz.dto.ResultDTO;
+import com.mockexam.Quiz.dto.AnswerResultDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,13 +44,17 @@ public class QuestionClient {
         return response.getBody();
     }
 
-    public ResultDTO postAnswer(String sessionKey, int alternativeKey) {
+    public AnswerResultDTO postAnswer(String sessionKey, int questionKey, int alternativeKey) {
         String url = UriComponentsBuilder
-                .fromHttpUrl(questionUrl + sessionKey + "/response/" + alternativeKey)
+                .fromHttpUrl(questionUrl + sessionKey + "/answer/" + questionKey + "/" + alternativeKey)
                 .toUriString();
 
-        ResponseEntity<ResultDTO> response = restTemplate.getForEntity(url, ResultDTO.class);
-
-        return response.getBody();
+        try {
+            ResponseEntity<AnswerResultDTO> response = restTemplate.postForEntity(url, null,AnswerResultDTO.class);
+            return response.getBody();
+        } catch (HttpClientErrorException e) {
+            log.error("Received error {} for url: {}", e, url);
+            return null;
+        }
     }
 }

@@ -2,9 +2,11 @@ package com.mockexam.Quiz.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class ResultDTO {
-    private String explanation;
+public class AnswerResultDTO {
+    private boolean correct;
 }
